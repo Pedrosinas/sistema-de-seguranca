@@ -3,6 +3,10 @@
 
 Database::Database(){
 	connection = mysql_init(nullptr);
+	
+	if (!connection) {
+        std::cout << "Erro ao inicializar MySQL." << std::endl;
+    }
 }
 
 Database::~Database(){
@@ -32,5 +36,17 @@ bool Database::conectar(const std::string& host,
 void Database::desconectar(){
 	if (connection){
 		mysql_close(connection);
+		connection = nullptr;
 	}
+}
+
+bool Database::executar(const std::string& sql) {
+
+    if (mysql_query(connection, sql.c_str())) {
+        std::cout << "Erro na query: "
+                  << mysql_error(connection) << std::endl;
+        return false;
+    }
+
+    return true;
 }

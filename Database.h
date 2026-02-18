@@ -18,5 +18,7 @@ class Database {
         	          const std::string& db);
 
 		void desconectar();
+		
+		bool executar(const std::string& sql);
 };
 #endif

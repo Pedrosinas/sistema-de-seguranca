@@ -8,8 +8,10 @@ class Administrador{
 	private:
 		Database& db;
 	public:
-		Administrador(Database& database){
-				bool cadastrarAluno(const Aluno& aluno);
-		}
+		Administrador(Database& database);
+
+		bool cadastrarAluno(const std::string& nome,
+							const std::string& matricula,
+							const std::string& pasta);
 };
 #endif

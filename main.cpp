@@ -1,22 +1,32 @@
-#include<iostream>
-#include"Aluno.h"
 #include"Database.h"
+#include"Administrador.h"
+#include"Aluno.h"
 
-void exibirAluno(const Aluno& aluno) {
-    std::cout << "Nome: " << aluno.getNome() << std::endl;
-    std::cout << "Matrícula: " << aluno.getMatricula() << std::endl;
-    std::cout << "Pasta: " << aluno.getPasta() << std::endl;
-}
+#include<iostream>
 
 int main(int argc, char *argv[]) {
 
-	Aluno aluno1("Pedro", "202310490021","61476");
+	Database db;
 
-	exibirAluno(aluno1);
+	if (!db.conectar("localhost", "iff_user", "1234", "sistema_de_seguranca")){
+		return 1;
+	}
 
-    Database db;
+	Administrador admin(db);
+	
+	std::string n, m, p;
+	std::cout << "Insira o nome: ";
+	std::cin >> n;
+	std::cout << "\nInsira a matricula: ";
+	std::cin >> m;
+	std::cout << "\nInsira a pasta: ";
+	std::cin >> p;
 
-	db.conectar("localhost", "iff_user", "1234", "sistema_de_seguranca");
+	if (admin.cadastrarAluno(n, m, p)) {
+        std::cout << "Aluno cadastrado com sucesso!" << std::endl;
+    } else {
+        std::cout << "Erro ao cadastrar aluno." << std::endl;
+    }
 
 return 0;
 }
