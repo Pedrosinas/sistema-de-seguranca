@@ -1,24 +1,28 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-#include<mariadb/mysql.h>
-#include<string>
+#include <mariadb/mysql.h>
+#include <string>
 
 class Database {
-	private:
-		MYSQL* connection;
+private:
+    MYSQL* connection;
+    std::string ultimoErro; // ← armazena o último erro
 
-	public:
-		Database();
-		~Database();		
+public:
+    Database();
+    ~Database();
 
-		bool conectar(const std::string& host,
-	                  const std::string& user,
-    	              const std::string& password,
-        	          const std::string& db);
+    bool conectar(const std::string& host,
+                  const std::string& user,
+                  const std::string& password,
+                  const std::string& db);
 
-		void desconectar();
-		
-		bool executar(const std::string& sql);
+    void desconectar();
+
+    bool executar(const std::string& sql);
+
+    std::string getErro() const { return ultimoErro; } // ← getter do erro
 };
+
 #endif
