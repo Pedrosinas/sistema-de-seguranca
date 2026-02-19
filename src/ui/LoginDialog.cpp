@@ -1,7 +1,7 @@
 #include "LoginDialog.h"
 
 LoginDialog::LoginDialog(Database& db)
-    : wxDialog(nullptr, wxID_ANY, "Login - Sistema IFF",
+	: wxDialog(nullptr, wxID_ANY, "Login - Sistema IFF",
                wxDefaultPosition, wxSize(300, 200)),
       db(db)
 {
