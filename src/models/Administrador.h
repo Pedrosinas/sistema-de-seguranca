@@ -1,7 +1,7 @@
 #ifndef ADMINISTRADOR_H
 #define ADMINISTRADOR_H
 
-#include"Database.h"
+#include"../db/Database.h"
 #include"Aluno.h"
 
 class Administrador{
