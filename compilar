@@ -1,0 +1,8 @@
+g++ main.cpp \
+    src/db/Database.cpp \
+    src/models/Aluno.cpp \
+    src/models/Administrador.cpp \
+    src/ui/LoginDialog.cpp \
+    src/ui/Login.cpp \
+    src/ui/CadastroAlunoFrame.cpp \
+    `wx-config --cxxflags --libs` -lmariadb -o sistema
