@@ -1,12 +1,13 @@
-#ifndef LOGINDIALOG_H
-#define LOGINDIALOG_H
+#ifndef LOGINALUNO_H
+#define LOGINALUNO_H
 
 #include <wx/wx.h>
+#include <wx/statline.h>
 #include "../db/Database.h"
 
-class LoginDialog : public wxDialog {
+class LoginAluno : public wxDialog {
 private:
-    wxTextCtrl* txtUsuario;
+    wxTextCtrl* txtMatricula;
     wxTextCtrl* txtSenha;
     Database& db;
 
@@ -14,7 +15,7 @@ private:
     void OnCancelar(wxCommandEvent& event);
 
 public:
-    LoginDialog(Database& db);
+    LoginAluno(Database& db);
 };
 
 #endif

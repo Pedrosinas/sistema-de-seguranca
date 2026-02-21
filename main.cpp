@@ -1,8 +1,9 @@
 #include <wx/wx.h>
 #include "src/db/Database.h"
-#include "src/ui/LoginDialog.h"
-#include "src/ui/CadastroAlunoFrame.h"
 #include "src/ui/Login.h"
+#include "src/ui/LoginAdm.h"
+#include "src/ui/LoginAluno.h"
+#include "src/ui/CadastroAlunoFrame.h"
 
 class MyApp : public wxApp {
 public:
@@ -18,19 +19,34 @@ public:
             delete db;
             return false;
         }
-		
-		Login* log = new Login();
-		
-		if (log->ShowModal() == wxID_OK){
-			LoginDialog* login = new LoginDialog(*db);
 
- 			if (login->ShowModal() == wxID_OK) {
-            	CadastroAlunoFrame* frame = new CadastroAlunoFrame(*db);
-            	frame->Show(true);
-				SetTopWindow(frame);
-			}
-			login->Destroy();
-		}
+        Login* log = new Login();
+
+        if (log->ShowModal() == wxID_OK) {
+            std::string modo = log->mode;
+            log->Destroy();
+
+            if (modo == "administrador") {
+                LoginAdm* login = new LoginAdm(*db);
+
+                if (login->ShowModal() == wxID_OK) {
+                    CadastroAlunoFrame* frame = new CadastroAlunoFrame(*db);
+                    frame->Show(true);
+                    SetTopWindow(frame);
+                }
+                login->Destroy();
+
+            } else if (modo == "aluno") {
+                LoginAluno* login = new LoginAluno(*db);
+
+                if (login->ShowModal() == wxID_OK) {
+                    // TODO: tela do aluno quando estiver pronta
+                }
+                login->Destroy();
+            }
+        } else {
+            log->Destroy();
+        }
 
         return true;
     }
